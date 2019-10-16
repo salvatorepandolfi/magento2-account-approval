@@ -15,6 +15,14 @@
                     <label>Module Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="account_approve_template" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Account Confirmation Template</label>
+                    <comment>Email template to use for notify the customer that his account been confirmed.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
             </group>
         </section>
     </system>
