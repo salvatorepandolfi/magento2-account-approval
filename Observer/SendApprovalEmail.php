@@ -59,13 +59,12 @@ class SendApprovalEmail implements ObserverInterface
             $email = $this->scopeConfig->getValue('trans_email/ident_general/email', ScopeInterface::SCOPE_STORE);
             $name = $this->scopeConfig->getValue('trans_email/ident_general/name', ScopeInterface::SCOPE_STORE);
 
-            $template_email = $this->scopeConfig->getValue('customerlogin/general/account_approve_template', ScopeInterface::SCOPE_STORE);
 
             $postObject = new \Magento\Framework\DataObject();
             $postObject->setData($approveVariables);
 
             $transport = $this->transportBuilder
-                ->setTemplateIdentifier($template_email_id)
+                ->setTemplateIdentifier($template_email)
                 ->setTemplateOptions(['area' => \Magento\Framework\App\Area::AREA_FRONTEND, 'store' => $customer->getStoreId()])
                 ->setTemplateVars(['data' => $postObject])
                 ->setFrom(['name' => $name, 'email' => $email])
