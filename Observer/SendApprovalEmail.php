@@ -43,8 +43,7 @@ class SendApprovalEmail implements ObserverInterface
         $approveAccountOld = isset($oldAppAcc) ? (int)$oldAppAcc->getValue() : 0;
 
         if ($approveAccount !== $approveAccountOld && $approveAccount === 1) {
-            $store_id = $this->storeManager->getStore($customer->getStoreId())->getStoreGroupId();
-            $template_email_id = $this->scopeConfig->getValue('customerlogin/general/account_approve_template', ScopeInterface::SCOPE_STORE, $store_id);
+            $template_email_id = $this->scopeConfig->getValue('customerlogin/general/account_approve_template', ScopeInterface::SCOPE_STORE, $customer->getStoreId());
             $template_email =  $template_email_id ? $template_email_id :'amitshree_customer_account_approved';
 
             $firstName = $customer->getFirstName();
@@ -70,6 +69,10 @@ class SendApprovalEmail implements ObserverInterface
                 ->setFrom(['name' => $name, 'email' => $email])
                 ->addTo([$customerEmail])
                 ->getTransport();
+
+
+
+
             $transport->sendMessage();
         }
         return $this;
